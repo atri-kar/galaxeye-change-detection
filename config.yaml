@@ -50,15 +50,15 @@ evaluation:
 # --- RESULTS ---
 results:
   validation:
-    IoU: 0.3097
-    Precision: 0.3586
-    Recall: 0.6943
-    F1: 0.4729
+    IoU: 0.2732        # was 0.3097
+    Precision: 0.3219  # was 0.3586
+    Recall: 0.6437     # was 0.6943
+    F1: 0.4292         # was 0.4729
   test:
-    IoU: 0.0081
-    Precision: 0.0084
-    Recall: 0.2180
-    F1: 0.0161
+    IoU: 0.0052        # was 0.0081
+    Precision: 0.0053  # was 0.0084
+    Recall: 0.1282     # was 0.2180
+    F1: 0.0103         # was 0.0161
 
 # --- HARDWARE ---
 hardware:
