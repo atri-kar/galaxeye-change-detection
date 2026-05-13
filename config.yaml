@@ -1,0 +1,68 @@
+
+# GalaxEye Change Detection Assignment
+# Configuration File — All Hyperparameters and Design Decisions
+# Atri Kar
+
+# --- DATA ---
+data:
+  root_dir: "/content/dataset"
+  image_size: 256          # Resized from 1024x1024 to fit GPU memory
+  in_channels: 4           # 3 EO (RGB) + 1 SAR (grayscale) concatenated
+  num_classes: 2           # Binary: No-Change (0) and Change (1)
+  augmentations:
+    - horizontal_flip      # Random horizontal flip (p=0.5)
+    - vertical_flip        # Random vertical flip (p=0.5)
+
+# --- MODEL ---
+model:
+  architecture: "UNet"
+  fusion_strategy: "early_fusion"   # EO and SAR concatenated at input
+  encoder_features: [64, 128, 256, 512]
+  bottleneck_features: 1024
+  pretrained: false                 # Trained from scratch on provided data
+
+# --- TRAINING ---
+training:
+  epochs: 30                        # Maximum epochs (early stopping used)
+  epochs_completed: 20              # Best checkpoint from second training run
+  best_val_loss: 0.5179
+  batch_size: 8
+  optimizer: "Adam"
+  learning_rate: 0.0001             # 1e-4
+  scheduler: "ReduceLROnPlateau"
+  scheduler_patience: 5
+  scheduler_factor: 0.5
+  early_stopping_patience: 7
+  random_seed: 42
+
+# --- LOSS FUNCTION ---
+loss:
+  type: "CombinedLoss"
+  dice_weight: 0.5
+  bce_weight: 0.5
+  bce_class_weights: [1.0, 10.0]   # Change class weighted 10x to handle imbalance
+
+# --- EVALUATION ---
+evaluation:
+  metrics: [IoU, Precision, Recall, F1]
+  positive_class: 1                 # Change class
+
+# --- RESULTS ---
+results:
+  validation:
+    IoU: 0.3097
+    Precision: 0.3586
+    Recall: 0.6943
+    F1: 0.4729
+  test:
+    IoU: 0.0081
+    Precision: 0.0084
+    Recall: 0.2180
+    F1: 0.0161
+
+# --- HARDWARE ---
+hardware:
+  platform: "Google Colab"
+  gpu: "NVIDIA T4"
+  gpu_vram: "15GB"
+  num_gpus: 1
