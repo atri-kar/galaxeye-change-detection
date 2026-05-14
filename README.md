@@ -101,7 +101,7 @@ best_model_path = "/path/to/your/checkpoint.pth"
 
 The final trained model checkpoint is available for download:
 
-🔗 **[Download best_model.pth](https://drive.google.com/file/d/1xO0us_F0WEYEDPvOutusQx7klq5SkuRt/view?usp=sharing)**
+🔗 **[Download best_model.pth](https://huggingface.co/atrikar/galaxeye-change-detection/resolve/main/best_model.pth)**
 
 Place the downloaded file at the path specified in `MODEL_PATH` 
 in Cell 0, then run Cell 11 to load and evaluate.
