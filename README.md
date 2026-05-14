@@ -22,7 +22,7 @@ input, processed by a U-Net encoder-decoder architecture trained with a combined
 - Google Colab (recommended for GPU access)
 
 Install all dependencies:
-pip install torch torchvision numpy pillow matplotlib seaborn scikit-learn tqdm
+pip install -r requirements.txt
 
 ## Environment Setup:
 
